@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toán 11</title>
+<style>
+:root{--s1:#f5f4ef;--s2:#fff;--bd:rgba(0,0,0,.12);--bds:rgba(0,0,0,.25);--tp:#1f1f1d;--ts:#5f5e5a;--ba:#e6f1fb;--ta:#185fa5;--bda:#85b7eb;--bs:#eaf3de;--tsu:#3b6d11;--bdsu:#97c459;--bdg:#fcebeb;--td:#a32d2d;--bdd:#f09595}
+@media(prefers-color-scheme:dark){:root{--s1:#262624;--s2:#30302e;--bd:rgba(255,255,255,.12);--bds:rgba(255,255,255,.25);--tp:#f1efe8;--ts:#b4b2a9;--ba:#0c447c;--ta:#b5d4f4;--bda:#378add;--bs:#27500a;--tsu:#c0dd97;--bdsu:#639922;--bdg:#791f1f;--td:#f7c1c1;--bdd:#e24b4a}}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--s1);color:var(--tp);font-family:system-ui,sans-serif;font-size:15px;line-height:1.7}
+h1{font-size:20px;font-weight:500;margin:0 0 12px}h3{font-size:16px;font-weight:500}
+button{font:inherit;color:var(--tp);background:transparent;border:1px solid var(--bds);border-radius:8px;padding:8px 12px;cursor:pointer}
+.nv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.on{background:var(--ba)!important;color:var(--ta)!important;border-color:var(--bda)!important}
+.cd{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:14px;margin:0 0 10px}
+.op{display:block;width:100%;text-align:left;margin:6px 0;font-size:14px}
+.ok{background:var(--bs);color:var(--tsu);border-color:var(--bdsu)}
+.no{background:var(--bdg);color:var(--td);border-color:var(--bdd)}
+.sm{font-size:13px;color:var(--ts)}
+.fm{font-family:monospace;font-size:13px;line-height:1.8;margin:4px 0}
+.mt{background:var(--s1);border-radius:8px;padding:14px;text-align:center}
+.vd{background:var(--s1);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:14px}
+.lt{margin:4px 0}
+.yt{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)}
+.yt a,.lk{font-size:13px;padding:5px 10px;border:1px solid var(--bds);border-radius:8px;color:var(--tp);text-decoration:none}
+</style>
+</head>
+<body>
+<h1>Toán 11</h1>
+<div class="nv">
+<button id="t0" onclick="go(0)">Bài giảng</button>
+<button id="t1" onclick="go(1)">Kiểm tra</button>
+<button id="t2" onclick="go(2)">Đề thi</button>
+<button id="t3" onclick="go(3)">Công thức</button>
+</div>
+<div id="m"></div>
+<script>
+const T=[["Thầy Nguyễn Phan Tiến","https://www.youtube.com/@Thay.NguyenPhanTien/playlists"],["Thầy Nguyễn Công Chính","https://www.youtube.com/@thaynguyencongchinhtoan/playlists"],["Thầy Đỗ Văn Đức","https://www.youtube.com/@thayductoan"]];
+const C=[
+{n:"Hàm số lượng giác và PT lượng giác",b:[
+["Góc lượng giác",["Đơn vị radian: π rad = 180°. Đổi độ sang rad: nhân π/180; rad sang độ: nhân 180/π.","Độ dài cung tròn bán kính R, số đo α rad: l = R·α.","Số đo góc lượng giác (Ou, Ov) = α + k2π, k ∈ ℤ."],[["Đổi 3π/4 rad sang độ.","3π/4 · 180/π = 135°."],["Cung tròn bán kính 10 cm, số đo 1,5 rad. Tính độ dài cung.","l = 10 · 1,5 = 15 cm."]]],
+["Công thức lượng giác",["sin²α + cos²α = 1; tan α = sin α/cos α; tan α·cot α = 1.","Cung liên kết: cos đối, sin bù, phụ chéo, hơn kém π thì tan và cot.","Công thức cộng: cos(a − b) = cos a cos b + sin a sin b; sin(a + b) = sin a cos b + cos a sin b.","Nhân đôi: sin 2a = 2sin a cos a; cos 2a = 2cos²a − 1 = 1 − 2sin²a."],[["Cho sin α = 3/5 và π/2 < α < π. Tính cos α, tan α.","cos²α = 1 − 9/25 = 16/25. Vì α ở góc phần tư II nên cos α = −4/5. tan α = (3/5):(−4/5) = −3/4."],["Tính cos 75°.","cos 75° = cos(45° + 30°) = cos45°cos30° − sin45°sin30° = (√6 − √2)/4."]]],
+["Hàm số lượng giác",["y = sin x, y = cos x: tập xác định ℝ, tập giá trị [−1; 1], chu kỳ 2π.","y = tan x: xác định khi x ≠ π/2 + kπ; y = cot x: x ≠ kπ; chu kỳ π.","cos x là hàm chẵn; sin x, tan x, cot x là hàm lẻ.","y = sin(ax + b), y = cos(ax + b) có chu kỳ 2π/|a|."],[["Tìm chu kỳ của y = sin 2x.","T = 2π/2 = π."],["Tìm giá trị lớn nhất của y = 3 + 2cos x.","Vì cos x ≤ 1 nên y ≤ 5, đạt khi x = k2π. Vậy GTLN là 5."]]],
+["Phương trình lượng giác cơ bản",["sin x = sin α ⇔ x = α + k2π hoặc x = π − α + k2π.","cos x = cos α ⇔ x = ±α + k2π.","tan x = tan α ⇔ x = α + kπ; cot x = cot α ⇔ x = α + kπ.","Với sin x = m, cos x = m cần |m| ≤ 1 thì mới có nghiệm."],[["Giải 2cos x − 1 = 0.","cos x = 1/2 = cos(π/3) ⇒ x = ±π/3 + k2π."],["Giải tan(x − π/4) = 1.","x − π/4 = π/4 + kπ ⇒ x = π/2 + kπ."]]]],
+q:[["Đổi 120° sang radian:",["π/3","2π/3","3π/4","5π/6"],1,"120·π/180 = 2π/3"],
+["3π/4 rad bằng bao nhiêu độ?",["120°","145°","135°","150°"],2,"3π/4 · 180/π = 135°"],
+["Chu kỳ của y = tan x:",["2π","π/2","π","4π"],2,"tan, cot có chu kỳ π"],
+["Chu kỳ của y = sin 2x:",["2π","π","π/2","4π"],1,"T = 2π/2 = π"],
+["Nghiệm của sin x = 1/2:",["x = π/6 + k2π; x = 5π/6 + k2π","x = ±π/6 + k2π","x = π/3 + kπ","x = π/6 + kπ"],0,"x = π/6 + k2π hoặc x = π − π/6 + k2π"],
+["cos 2a bằng:",["2sin a cos a","1 − 2sin²a","1 + 2cos²a","cos²a + sin²a"],1,"cos 2a = 1 − 2sin²a"],
+["Hàm số nào là hàm chẵn?",["y = sin x","y = cos x","y = tan x","y = cot x"],1,"cos(−x) = cos x"],
+["GTLN của y = 3 + 2cos x:",["3","1","5","6"],2,"cos x ≤ 1 ⇒ y ≤ 5"],
+["sin α = 3/5, π/2 < α < π. cos α =",["4/5","−4/5","3/4","−3/4"],1,"Góc phần tư II nên cos âm: −4/5"],
+["Nghiệm của 2cos x − 1 = 0:",["x = ±π/3 + k2π","x = π/6 + k2π","x = ±π/6 + kπ","x = π/3 + kπ"],0,"cos x = 1/2 = cos(π/3)"]]},
+{n:"Dãy số, cấp số cộng, cấp số nhân",b:[
+["Dãy số",["Dãy số là hàm số u xác định trên tập số nguyên dương, kí hiệu (uₙ).","Dãy tăng nếu uₙ₊₁ > uₙ, giảm nếu uₙ₊₁ < uₙ với mọi n.","Dãy bị chặn nếu tồn tại m, M sao cho m ≤ uₙ ≤ M với mọi n."],[["Xét tính tăng giảm của uₙ = (n + 1)/n.","uₙ = 1 + 1/n. Khi n tăng thì 1/n giảm nên dãy giảm. Dãy bị chặn: 1 < uₙ ≤ 2."]]],
+["Cấp số cộng",["uₙ₊₁ = uₙ + d (d là công sai).","Số hạng tổng quát: uₙ = u₁ + (n − 1)d.","Tính chất: uₖ = (uₖ₋₁ + uₖ₊₁)/2.","Tổng n số hạng đầu: Sₙ = n(u₁ + uₙ)/2 = n[2u₁ + (n − 1)d]/2."],[["CSC có u₁ = 3, d = 4. Tính u₂₀ và S₂₀.","u₂₀ = 3 + 19·4 = 79. S₂₀ = 20(3 + 79)/2 = 820."]]],
+["Cấp số nhân",["uₙ₊₁ = uₙ·q (q là công bội).","Số hạng tổng quát: uₙ = u₁·qⁿ⁻¹.","Tính chất: uₖ² = uₖ₋₁·uₖ₊₁.","Tổng: Sₙ = u₁(1 − qⁿ)/(1 − q), với q ≠ 1."],[["CSN có u₁ = 2, q = 3. Tính u₄ và S₄.","u₄ = 2·3³ = 54. S₄ = 2(1 − 81)/(1 − 3) = 80."]]]],
+q:[["CSC có u₁ = 2, d = 3. u₁₀ =",["29","32","30","27"],0,"2 + 9·3 = 29"],
+["CSN có u₁ = 3, q = 2. u₅ =",["24","96","48","30"],2,"3·2⁴ = 48"],
+["1 + 2 + … + 100 =",["5000","5050","5100","10100"],1,"100·101/2 = 5050"],
+["Dãy nào là cấp số nhân?",["1, 3, 5, 7","2, 4, 8, 16","1, 4, 9, 16","1, 2, 4, 7"],1,"q = 2"],
+["Dãy uₙ = 1/n là dãy:",["Tăng","Giảm","Hằng","Không tăng không giảm"],1,"1/(n+1) < 1/n"],
+["CSC có u₁ = 5, u₃ = 11. Công sai d =",["2","3","6","4"],1,"u₃ = u₁ + 2d ⇒ d = 3"],
+["2, x, 10 là cấp số cộng. x =",["5","6","8","4"],1,"x = (2 + 10)/2 = 6"],
+["x, 6, 12 là cấp số nhân. x =",["2","3","4","0"],1,"36 = 12x ⇒ x = 3"],
+["CSN u₁ = 1, q = 2. S₅ =",["31","32","16","15"],0,"(1 − 2⁵)/(1 − 2) = 31"]]},
+{n:"Mẫu số liệu ghép nhóm",b:[
+["Mẫu số liệu ghép nhóm",["Số liệu chia thành các nhóm [a₁; a₂), [a₂; a₃), … kèm tần số nᵢ.","Độ dài nhóm h = aᵢ₊₁ − aᵢ; giá trị đại diện cᵢ = (aᵢ + aᵢ₊₁)/2.","Cỡ mẫu n = n₁ + n₂ + … + nₖ."],[]],
+["Số đặc trưng đo xu thế trung tâm mẫu ghép nhóm",["Số trung bình: x̄ = (n₁c₁ + … + nₖcₖ)/n.","Trung vị: tìm nhóm chứa vị trí n/2, Me = uₘ + [(n/2 − C)/nₘ]·h, với C là tổng tần số các nhóm trước.","Tứ phân vị Q₁, Q₃: làm tương tự với vị trí n/4, 3n/4; Q₂ = Me.","Mốt: nhóm có tần số lớn nhất, Mo = uₘ + [(nₘ − nₘ₋₁)/((nₘ − nₘ₋₁) + (nₘ − nₘ₊₁))]·h."],[["Bảng: [0;10): 5, [10;20): 10, [20;30): 5. Tính x̄, Me, Mo.","n = 20. x̄ = (5·5 + 10·15 + 5·25)/20 = 15. Me: n/2 = 10 thuộc [10;20), C = 5 ⇒ Me = 10 + (5/10)·10 = 15. Mo = 10 + 5/(5 + 5)·10 = 15."]]]],
+q:[["Giá trị đại diện của nhóm [10; 20):",["10","20","15","30"],2,"(10 + 20)/2"],
+["Nhóm có tần số lớn nhất dùng để tìm:",["Trung vị","Mốt","Số trung bình","Tứ phân vị"],1,"Nhóm chứa mốt"],
+["[0;2) tần số 3, [2;4) tần số 1. x̄ =",["1,5","2","1","2,5"],0,"(3·1 + 1·3)/4"],
+["Độ dài nhóm [5; 10):",["10","5","7,5","15"],1,"10 − 5 = 5"],
+["Các nhóm có tần số 4, 7, 9. Cỡ mẫu n =",["9","20","16","3"],1,"4 + 7 + 9"],
+["Tứ phân vị thứ hai Q₂ chính là:",["Mốt","Số trung bình","Trung vị","Q₁ + Q₃"],2,"Q₂ = Me"],
+["[0;10): 3, [10;20): 4, [20;30): 3. Trung vị thuộc nhóm:",["[0;10)","[10;20)","[20;30)","Không xác định"],1,"Vị trí 5, 6 thuộc nhóm thứ hai"]]},
+{n:"Quan hệ song song trong không gian",b:[
+["Đường thẳng và mặt phẳng trong không gian",["Mặt phẳng được xác định bởi: 3 điểm không thẳng hàng; 1 đường thẳng và 1 điểm ngoài nó; 2 đường thẳng cắt nhau.","Tìm giao tuyến hai mặt phẳng: tìm 2 điểm chung phân biệt.","Tìm giao điểm của d và (P): tìm đường a ⊂ (P) cắt d."],[["Chóp S.ABCD đáy hình bình hành tâm O. Tìm giao tuyến của (SAC) và (SBD).","S là điểm chung thứ nhất. O = AC ∩ BD nên O cũng là điểm chung. Giao tuyến là SO."]]],
+["Hai đường thẳng song song",["Hai đường thẳng có thể: trùng, cắt nhau, song song (đồng phẳng, không điểm chung), chéo nhau (không đồng phẳng).","Hai mặt phẳng cắt nhau lần lượt chứa hai đường song song thì giao tuyến song song (hoặc trùng) với hai đường đó."],[["S.ABCD đáy hình bình hành. Tìm giao tuyến của (SAD) và (SBC).","S chung, AD ∥ BC nên giao tuyến là đường thẳng qua S song song với AD."]]],
+["Đường thẳng song song mặt phẳng, hai mặt phẳng song song",["a ∥ (P) nếu a ⊄ (P) và a song song với một đường nằm trong (P).","(P) ∥ (Q) nếu (P) chứa hai đường cắt nhau cùng song song với (Q).","Hình hộp có 6 mặt là hình bình hành, các mặt đối diện song song."],[]],
+["Phép chiếu song song",["Bảo toàn tính thẳng hàng, tính song song và tỉ số hai đoạn thẳng cùng phương.","Trung điểm biến thành trung điểm; hình bình hành thường biến thành hình bình hành."],[]]],
+q:[["Qua 1 điểm ngoài đường thẳng a có bao nhiêu đường song song với a?",["0","1","2","Vô số"],1,"Tiên đề Ơ-clít"],
+["4 điểm không đồng phẳng xác định bao nhiêu mặt phẳng?",["1","3","4","6"],2,"C(4,3) = 4"],
+["Hai đường không đồng phẳng gọi là:",["Song song","Cắt nhau","Chéo nhau","Trùng nhau"],2,"Định nghĩa"],
+["S.ABCD đáy hình bình hành tâm O. (SAC) ∩ (SBD) =",["SA","SO","SB","AC"],1,"S và O là hai điểm chung"],
+["S.ABCD đáy hình bình hành. Giao tuyến (SAD) và (SBC) song song với:",["AB","AC","AD","SC"],2,"AD ∥ BC"],
+["Hình hộp có bao nhiêu mặt?",["4","5","6","8"],2,"6 mặt hình bình hành"],
+["Phép chiếu song song biến trung điểm đoạn thẳng thành:",["Trung điểm","Đầu mút","Điểm bất kỳ","Không xác định"],0,"Bảo toàn tỉ số"],
+["Mặt phẳng được xác định duy nhất bởi:",["3 điểm","2 đường chéo nhau","3 điểm không thẳng hàng","1 đường thẳng"],2,"Định lí xác định mặt phẳng"]]},
+{n:"Giới hạn, hàm số liên tục",b:[
+["Giới hạn của dãy số",["lim 1/nᵏ = 0 (k > 0); lim qⁿ = 0 khi |q| < 1.","Phân thức theo n: chia tử và mẫu cho lũy thừa cao nhất của n.","Cấp số nhân lùi vô hạn (|q| < 1): S = u₁/(1 − q)."],[["Tính lim (3n² + 1)/(n² − 2).","Chia tử và mẫu cho n²: lim (3 + 1/n²)/(1 − 2/n²) = 3."],["Tính 1 + 1/2 + 1/4 + …","CSN lùi vô hạn u₁ = 1, q = 1/2: S = 1/(1 − 1/2) = 2."]]],
+["Giới hạn của hàm số",["Hàm đa thức, phân thức xác định tại x₀: thay trực tiếp x = x₀.","Dạng 0/0: phân tích nhân tử hoặc nhân liên hợp rồi rút gọn.","x → ±∞: chia cho lũy thừa cao nhất của x.","lim f(x) tồn tại ⇔ giới hạn trái bằng giới hạn phải."],[["Tính lim (x² − 1)/(x − 1) khi x → 1.","= lim (x − 1)(x + 1)/(x − 1) = lim (x + 1) = 2."],["Tính lim (2x + 1)/(x − 3) khi x → +∞.","Chia cho x: (2 + 1/x)/(1 − 3/x) → 2."]]],
+["Hàm số liên tục",["f liên tục tại x₀ ⇔ lim f(x) (x → x₀) = f(x₀).","Đa thức, phân thức, hàm lượng giác liên tục trên từng khoảng xác định.","Nếu f liên tục trên [a; b] và f(a)·f(b) < 0 thì PT f(x) = 0 có nghiệm trong (a; b)."],[["Chứng minh x³ + x − 1 = 0 có nghiệm trong (0; 1).","f(x) = x³ + x − 1 liên tục trên ℝ; f(0) = −1, f(1) = 1, f(0)f(1) < 0 nên có nghiệm trong (0; 1)."]]]],
+q:[["lim (2n + 1)/(n + 3) =",["1/3","2","1","+∞"],1,"Chia cho n: 2/1"],
+["lim (x² − 4)/(x − 2), x → 2:",["0","2","4","Không tồn tại"],2,"= lim (x + 2) = 4"],
+["lim (1/2)ⁿ =",["1/2","1","0","+∞"],2,"|q| < 1"],
+["1 + 1/2 + 1/4 + … =",["1","2","3/2","+∞"],1,"1/(1 − 1/2) = 2"],
+["lim (n² + 1)/(2n²) =",["1","0","1/2","2"],2,"Tỉ số hệ số cao nhất"],
+["lim (3x − 1)/(x + 2), x → +∞:",["3","−1/2","1","+∞"],0,"Chia cho x"],
+["lim 1/x, x → 0⁺:",["0","−∞","+∞","1"],2,"x dương nhỏ dần nên 1/x → +∞"],
+["x³ + x − 1 = 0 chắc chắn có nghiệm trong khoảng:",["(−2; −1)","(0; 1)","(1; 2)","(2; 3)"],1,"f(0)f(1) = −1 < 0"]]},
+{n:"Hàm số mũ và logarit",b:[
+["Phép tính lũy thừa",["aᵐ·aⁿ = aᵐ⁺ⁿ; aᵐ/aⁿ = aᵐ⁻ⁿ; (aᵐ)ⁿ = aᵐⁿ.","a^(m/n) = ⁿ√(aᵐ) với a > 0.","a⁻ⁿ = 1/aⁿ; a⁰ = 1."],[["Tính 8^(2/3).","8^(2/3) = (∛8)² = 2² = 4."]]],
+["Phép tính logarit",["logₐb = c ⇔ aᶜ = b (0 < a ≠ 1, b > 0).","logₐ(bc) = logₐb + logₐc; logₐ(b/c) = logₐb − logₐc; logₐbⁿ = n·logₐb.","Đổi cơ số: logₐb = log꜀b/log꜀a. lg x = log₁₀x, ln x = logₑx."],[["Tính log₃81 và log₂12 − log₂3.","log₃81 = 4 vì 3⁴ = 81. log₂12 − log₂3 = log₂4 = 2."]]],
+["Hàm số mũ và hàm số logarit",["y = aˣ: tập xác định ℝ, giá trị dương. y = logₐx: xác định khi x > 0.","a > 1: hàm đồng biến; 0 < a < 1: hàm nghịch biến."],[]],
+["Phương trình bất phương trình mũ và logarit",["aˣ = b (b > 0) ⇔ x = logₐb. logₐx = b ⇔ x = aᵇ.","Bất phương trình: a > 1 giữ nguyên chiều; 0 < a < 1 đổi chiều.","Với logarit phải đặt điều kiện biểu thức trong log dương."],[["Giải 3^(x − 1) = 27.","27 = 3³ ⇒ x − 1 = 3 ⇒ x = 4."],["Giải log₂(x + 1) = 3.","Điều kiện x > −1. x + 1 = 2³ = 8 ⇒ x = 7 (thỏa)."],["Giải (1/2)ˣ > 4.","4 = (1/2)⁻². Cơ số 1/2 < 1 nên đổi chiều: x < −2."]]]],
+q:[["log₂8 =",["2","3","4","8"],1,"2³ = 8"],
+["Nghiệm của 2ˣ = 16:",["3","8","4","2"],2,"16 = 2⁴"],
+["Tập xác định của y = log(x − 1):",["(1; +∞)","[1; +∞)","ℝ","(0; +∞)"],0,"x − 1 > 0"],
+["log 2 + log 5 =",["log 7","1","10","log 2,5"],1,"log 10 = 1"],
+["8^(2/3) =",["4","16/3","2","6"],0,"(∛8)² = 4"],
+["Nghiệm của log₂(x + 1) = 3:",["8","7","9","5"],1,"x + 1 = 8"],
+["Hàm số nghịch biến trên ℝ:",["y = 2ˣ","y = eˣ","y = (0,5)ˣ","y = 3ˣ"],2,"Cơ số 0,5 < 1"],
+["Nghiệm của (1/2)ˣ > 4:",["x > 2","x < −2","x > −2","x < 2"],1,"Cơ số < 1 nên đổi chiều"],
+["ln e² =",["e","2","1","e²"],1,"ln eⁿ = n"]]},
+{n:"Quan hệ vuông góc",b:[
+["Hai đường thẳng vuông góc",["Góc giữa a và b bằng góc giữa hai đường cắt nhau lần lượt song song với a, b (từ 0° đến 90°).","a ⊥ b nếu góc giữa chúng bằng 90°."],[]],
+["Đường thẳng vuông góc với mặt phẳng",["d ⊥ (P) nếu d vuông góc với hai đường cắt nhau nằm trong (P). Khi đó d vuông góc mọi đường trong (P).","Định lí ba đường vuông góc: a ⊂ (P), a ⊥ hình chiếu của b lên (P) ⇔ a ⊥ b."],[["S.ABCD đáy hình vuông, SA ⊥ (ABCD). Chứng minh BD ⊥ (SAC).","BD ⊥ AC (hai đường chéo hình vuông) và BD ⊥ SA (vì SA ⊥ đáy). AC, SA cắt nhau trong (SAC) nên BD ⊥ (SAC)."]]],
+["Góc giữa đường thẳng và mặt phẳng, khoảng cách",["Góc giữa d và (P): góc giữa d và hình chiếu d' của nó trên (P).","Hai mặt phẳng vuông góc khi một mặt chứa đường vuông góc với mặt kia.","Khoảng cách từ điểm đến mặt phẳng bằng độ dài đoạn vuông góc."],[["S.ABCD đáy vuông cạnh a, SA ⊥ đáy, SA = a√2. Tính góc giữa SC và đáy.","Hình chiếu của SC là AC = a√2. tan(SCA) = SA/AC = 1 ⇒ góc bằng 45°."]]],
+["Thể tích khối chóp khối lăng trụ",["Khối chóp: V = ⅓Bh. Khối lăng trụ: V = Bh.","Khối chóp cụt: V = ⅓h(S + √(SS') + S').","Hình lập phương cạnh a: V = a³."],[["Tính thể tích khối chóp ở ví dụ trên.","V = ⅓·a²·a√2 = a³√2/3."]]]],
+q:[["d ⊥ (P) khi d vuông góc với:",["1 đường trong (P)","2 đường song song trong (P)","2 đường cắt nhau trong (P)","Mọi đường ngoài (P)"],2,"Điều kiện đủ"],
+["S.ABCD, SA ⊥ đáy. Góc giữa SC và đáy là:",["Góc SCA","Góc SAC","Góc SCB","Góc ASC"],0,"AC là hình chiếu của SC"],
+["Thể tích khối chóp đáy B, cao h:",["Bh","Bh/2","Bh/3","3Bh"],2,"V = ⅓Bh"],
+["Đáy vuông cạnh a, SA ⊥ đáy, SA = a√2. Góc giữa SC và đáy:",["30°","45°","60°","90°"],1,"tan = SA/AC = 1"],
+["Lập phương ABCD.A'B'C'D'. Góc giữa AC và B'D':",["30°","45°","60°","90°"],3,"B'D' ∥ BD ⊥ AC"],
+["Thể tích lăng trụ đáy B, cao h:",["Bh/3","Bh","2Bh","Bh/2"],1,"V = Bh"],
+["SA ⊥ (ABCD). Khoảng cách từ S đến (ABCD):",["SB","SC","SA","SD"],2,"SA là đoạn vuông góc"],
+["Thể tích khối lập phương cạnh 2:",["4","6","8","12"],2,"2³ = 8"]]},
+{n:"Quy tắc tính xác suất",b:[
+["Biến cố hợp, biến cố giao, biến cố độc lập",["A ∪ B: A hoặc B xảy ra. AB: cả A và B xảy ra.","A, B xung khắc nếu AB = ∅.","A, B độc lập nếu việc xảy ra của biến cố này không ảnh hưởng xác suất biến cố kia."],[]],
+["Công thức cộng và công thức nhân xác suất",["Xung khắc: P(A ∪ B) = P(A) + P(B).","Tổng quát: P(A ∪ B) = P(A) + P(B) − P(AB).","Độc lập: P(AB) = P(A)·P(B).","P(Ā) = 1 − P(A). Dùng cho bài toán ít nhất một."],[["Hộp có 3 bi đỏ, 2 bi xanh. Lấy ngẫu nhiên 2 bi. Tính xác suất lấy được 2 bi đỏ.","P = C(3,2)/C(5,2) = 3/10."],["Hai xạ thủ bắn độc lập, xác suất trúng 0,8 và 0,7. Tính xác suất cả hai trúng và ít nhất một người trúng.","Cả hai: 0,8·0,7 = 0,56. Ít nhất một: 1 − 0,2·0,3 = 0,94."]]]],
+q:[["A, B độc lập, P(A) = 0,5; P(B) = 0,4. P(AB) =",["0,9","0,2","0,1","0,45"],1,"0,5·0,4"],
+["Gieo 2 đồng xu. P(cả hai sấp) =",["1/2","1/3","1/4","3/4"],2,"1/2·1/2"],
+["P(A) = 0,3. P(Ā) =",["0,3","0,7","0,03","1,3"],1,"1 − 0,3"],
+["A, B xung khắc, P(A) = 0,3; P(B) = 0,4. P(A ∪ B) =",["0,12","0,7","0,1","0,58"],1,"0,3 + 0,4"],
+["P(A) = 0,5; P(B) = 0,4; P(AB) = 0,2. P(A ∪ B) =",["0,9","0,7","0,2","0,5"],1,"0,5 + 0,4 − 0,2"],
+["Bắn độc lập, trúng 0,8 và 0,7. P(ít nhất 1 trúng) =",["0,56","0,94","0,75","0,06"],1,"1 − 0,2·0,3"],
+["Gieo 1 xúc xắc. P(số chấm chẵn) =",["1/3","1/2","1/6","2/3"],1,"3/6"],
+["3 đỏ, 2 xanh, lấy 2 bi. P(2 đỏ) =",["3/5","3/10","1/5","2/5"],1,"C(3,2)/C(5,2)"],
+["Gieo 2 xúc xắc. P(tổng bằng 7) =",["1/6","1/12","7/36","1/9"],0,"6 kết quả trên 36"]]},
+{n:"Đạo hàm",b:[
+["Định nghĩa và ý nghĩa của đạo hàm",["f'(x₀) = lim [f(x) − f(x₀)]/(x − x₀) khi x → x₀.","Ý nghĩa hình học: f'(x₀) là hệ số góc tiếp tuyến tại M(x₀; f(x₀)). Tiếp tuyến: y = f'(x₀)(x − x₀) + f(x₀).","Ý nghĩa vật lý: vận tốc tức thời v(t) = s'(t)."],[["Viết tiếp tuyến của y = x³ tại x₀ = 1.","y' = 3x², y'(1) = 3, y(1) = 1. Tiếp tuyến: y = 3(x − 1) + 1 = 3x − 2."]]],
+["Các quy tắc tính đạo hàm",["(xⁿ)' = nxⁿ⁻¹; (√x)' = 1/(2√x); (sin x)' = cos x; (cos x)' = −sin x.","(eˣ)' = eˣ; (aˣ)' = aˣ ln a; (ln x)' = 1/x.","(u ± v)' = u' ± v'; (uv)' = u'v + uv'; (u/v)' = (u'v − uv')/v².","Hàm hợp: (uⁿ)' = n·uⁿ⁻¹·u'; (sin u)' = u'cos u; (eᵘ)' = u'eᵘ; (ln u)' = u'/u."],[["Tính đạo hàm y = (2x + 1)³.","y' = 3(2x + 1)²·2 = 6(2x + 1)²."]]],
+["Đạo hàm cấp hai",["f''(x) = [f'(x)]'.","Ý nghĩa: gia tốc a(t) = v'(t) = s''(t)."],[["Chuyển động s = t³ − 3t² + 5 (m). Tính v và a tại t = 2.","v = 3t² − 6t ⇒ v(2) = 0 m/s. a = 6t − 6 ⇒ a(2) = 6 m/s²."]]]],
+q:[["(x³)' =",["x²","3x²","3x","x⁴/4"],1,"(xⁿ)' = nxⁿ⁻¹"],
+["y = x² + 3x. y'(1) =",["4","5","3","2"],1,"2·1 + 3"],
+["(ln x)' =",["eˣ","1/x","x","ln x/x"],1,"Công thức cơ bản"],
+["Tiếp tuyến của y = x² tại x₀ = 1:",["y = 2x − 1","y = 2x + 1","y = x","y = x − 1"],0,"y = 2(x − 1) + 1"],
+["(sin 2x)' =",["cos 2x","2cos 2x","−2cos 2x","2sin x"],1,"(sin u)' = u'cos u"],
+["y = (2x + 1)³. y' =",["3(2x + 1)²","6(2x + 1)²","2(2x + 1)³","6(2x + 1)"],1,"3(2x+1)²·2"],
+["s = t³ − 3t². Vận tốc tại t = 3:",["9","0","27","18"],0,"v = 3t² − 6t = 27 − 18"],
+["y = x⁴. y'' =",["4x³","12x²","12x","24x"],1,"y' = 4x³, y'' = 12x²"],
+["(e²ˣ)' =",["e²ˣ","2e²ˣ","2xe²ˣ","e²ˣ/2"],1,"(eᵘ)' = u'eᵘ"]]}];
+const F=[["Đại số",["Δ = b² − 4ac; x = (−b ± √Δ)/2a","Viète: x₁ + x₂ = −b/a; x₁x₂ = c/a","a² − b² = (a − b)(a + b)","a³ ± b³ = (a ± b)(a² ∓ ab + b²)"]],
+["Lượng giác",["sin²x + cos²x = 1; 1 + tan²x = 1/cos²x","sin(a ± b) = sin a cos b ± cos a sin b","cos(a ± b) = cos a cos b ∓ sin a sin b","tan(a ± b) = (tan a ± tan b)/(1 ∓ tan a tan b)","sin 2a = 2sin a cos a; cos 2a = 2cos²a − 1","Hạ bậc: cos²a = (1 + cos 2a)/2; sin²a = (1 − cos 2a)/2","cos a + cos b = 2cos((a+b)/2)cos((a−b)/2)","sin a + sin b = 2sin((a+b)/2)cos((a−b)/2)"]],
+["Dãy số",["CSC: uₙ = u₁ + (n−1)d; Sₙ = n(u₁ + uₙ)/2","CSN: uₙ = u₁qⁿ⁻¹; Sₙ = u₁(1 − qⁿ)/(1 − q)","CSN lùi vô hạn: S = u₁/(1 − q)"]],
+["Mũ, logarit",["aᵐaⁿ = aᵐ⁺ⁿ; a^(m/n) = ⁿ√(aᵐ)","logₐ(bc) = logₐb + logₐc","logₐbⁿ = n logₐb","logₐb = log꜀b / log꜀a"]],
+["Đạo hàm",["(xⁿ)' = nxⁿ⁻¹; (√x)' = 1/(2√x)","(sin x)' = cos x; (cos x)' = −sin x","(tan x)' = 1/cos²x; (cot x)' = −1/sin²x","(eˣ)' = eˣ; (aˣ)' = aˣ ln a; (ln x)' = 1/x","(uv)' = u'v + uv'; (u/v)' = (u'v − uv')/v²","Tiếp tuyến: y = f'(x₀)(x − x₀) + f(x₀)"]],
+["Tổ hợp, xác suất",["Pₙ = n!; Aₙᵏ = n!/(n−k)!; Cₙᵏ = n!/(k!(n−k)!)","(a+b)ⁿ = Σ Cₙᵏ aⁿ⁻ᵏ bᵏ","P(A ∪ B) = P(A) + P(B) − P(AB)","Độc lập: P(AB) = P(A)P(B)"]],
+["Hình học",["Tam giác: S = ½ab sin C; a² = b² + c² − 2bc cos A","Định lí sin: a/sin A = 2R","Chóp: V = ⅓Bh; Lăng trụ: V = Bh","Cầu: S = 4πR²; V = 4/3 πR³","Trụ: V = πr²h; Nón: V = ⅓πr²h"]],
+["Nguyên hàm, tích phân (lớp 12)",["∫xⁿdx = xⁿ⁺¹/(n+1) + C","∫(1/x)dx = ln|x| + C; ∫eˣdx = eˣ + C","∫ₐᵇ f(x)dx = F(b) − F(a)"]]];
+const m=document.getElementById("m");let tm=null,S={};
+try{S=JSON.parse(localStorage.getItem("toan11")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("toan11",JSON.stringify(S))}catch(e){}};
+const yq=(t,k)=>"https://www.youtube.com/results?search_query="+encodeURIComponent(t+" toán 11 "+k);
+const vids=k=>`<div class="yt"><span class="sm" style="width:100%">Video bài giảng</span>${T.map(t=>`<a href="${yq(t[0],k)}" target="_blank">${t[0].replace("Thầy ","")}</a>`).join("")}</div>`;
+function go(i){clearInterval(tm);[0,1,2,3].forEach(k=>document.getElementById("t"+k).classList.toggle("on",k==i));[home0,home1,home2,form][i]();scrollTo(0,0)}
+function home0(){m.innerHTML=`<div class="cd"><div style="font-weight:500;margin-bottom:6px">Kênh giáo viên</div>${T.map(t=>`<div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0"><span style="font-size:14px">${t[0]}</span><a class="lk" href="${t[1]}" target="_blank">Mở kênh</a></div>`).join("")}</div>`+C.map((c,i)=>`<div class="cd" onclick="les(${i})" style="cursor:pointer"><div class="sm">Chương ${i+1} · ${c.b.length} bài</div><div style="font-weight:500">${c.n}</div></div>`).join("")}
+function les(i){const c=C[i];m.innerHTML=`<button onclick="home0()">← Danh sách</button><h3>Chương ${i+1}. ${c.n}</h3>`+c.b.map((b,k)=>`<div class="cd"><div style="font-weight:500;margin-bottom:6px">Bài ${k+1}. ${b[0]}</div>${b[1].map(x=>`<div class="lt">• ${x}</div>`).join("")}${b[2].map(v=>`<div class="vd"><div><b style="font-weight:500">Ví dụ.</b> ${v[0]}</div><button style="margin-top:6px;font-size:13px" onclick="const s=this.nextElementSibling;s.hidden=!s.hidden;this.textContent=s.hidden?'Xem lời giải':'Ẩn lời giải'">Xem lời giải</button><div hidden style="margin-top:6px;color:var(--tsu)">${v[1]}</div></div>`).join("")}${vids(b[0])}</div>`).join("")+`<button style="width:100%" onclick="go(1);quiz(${i})">Làm bài kiểm tra chương này</button>`;scrollTo(0,0)}
+function home1(){m.innerHTML=`<p class="sm">Chọn chương để kiểm tra, chấm điểm thang 10.</p>`+C.map((c,i)=>`<div class="cd" onclick="quiz(${i})" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px"><span>${i+1}. ${c.n} <span class="sm">(${c.q.length} câu)</span></span><span class="sm">${S[i]!=null?S[i]+"đ":""}</span></div>`).join("")}
+function quiz(i){run(sh(C[i].q.slice()),"Kiểm tra chương "+(i+1),i,0)}
+function sh(p){for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]]}return p}
+function run(qs,title,key,sec){let A=new Array(qs.length).fill(-1),done=false;
+m.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h3>${title}</h3><span id="tk" class="sm"></span></div>`+qs.map((q,k)=>`<div class="cd"><div style="font-weight:500">Câu ${k+1}. ${q[0]}</div>${q[1].map((o,j)=>`<button class="op" id="o${k}_${j}">${String.fromCharCode(65+j)}. ${o}</button>`).join("")}<div id="g${k}" class="sm"></div></div>`).join("")+`<div id="er" style="font-size:13px;color:var(--td);margin:0 0 8px"></div><button id="sb" style="width:100%">Nộp bài</button><div id="rs" style="margin-top:16px"></div>`;
+qs.forEach((q,k)=>q[1].forEach((o,j)=>{document.getElementById(`o${k}_${j}`).onclick=()=>{if(done)return;A[k]=j;document.getElementById("er").textContent="";q[1].forEach((_,x)=>document.getElementById(`o${k}_${x}`).classList.toggle("on",x==j))}}));
+const fin=f=>{if(done)return;if(!f&&A.includes(-1)){document.getElementById("er").textContent="Còn câu "+(A.indexOf(-1)+1)+" chưa trả lời. Hãy chọn đáp án trước khi nộp.";return}done=true;clearInterval(tm);let r=0;qs.forEach((q,k)=>{if(A[k]==q[2])r++;q[1].forEach((_,x)=>{const b=document.getElementById(`o${k}_${x}`);b.classList.remove("on");if(x==q[2])b.classList.add("ok");else if(x==A[k])b.classList.add("no")});document.getElementById("g"+k).textContent="Lời giải: "+q[3]});const d=Math.round(r/qs.length*100)/10;if(key!=null){S[key]=d;save()}const xl=d>=8?"Giỏi":d>=6.5?"Khá":d>=5?"Trung bình":"Cần ôn lại";document.getElementById("rs").innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="mt"><div class="sm">Điểm</div><div style="font-size:24px;font-weight:500">${d.toFixed(1)}</div></div><div class="mt"><div class="sm">Đúng</div><div style="font-size:24px;font-weight:500">${r}/${qs.length}</div></div></div><p class="sm" style="text-align:center">Xếp loại: ${xl}</p>`;document.getElementById("sb").textContent="Đã nộp";document.getElementById("rs").scrollIntoView({behavior:"smooth"})};
+document.getElementById("sb").onclick=()=>fin(false);
+if(sec){let t=sec;const tk=document.getElementById("tk");const up=()=>{tk.textContent=Math.floor(t/60)+":"+String(t%60).padStart(2,"0")};up();tm=setInterval(()=>{t--;up();if(t<=0)fin(true)},1000)}scrollTo(0,0)}
+function pick(ch,n){let p=[];ch.forEach(i=>C[i].q.forEach(q=>p.push(q)));return sh(p).slice(0,n)}
+const E=[["Đề giữa học kì 1","Chương 1, 2",[0,1],12,20],["Đề cuối học kì 1","Chương 1–4",[0,1,2,3],20,35],["Đề giữa học kì 2","Chương 5, 6",[4,5],12,20],["Đề cuối học kì 2","Chương 5–9",[4,5,6,7,8],25,45],["Đề tổng hợp cả năm","Toàn bộ 9 chương",[0,1,2,3,4,5,6,7,8],30,60]];
+function home2(){m.innerHTML=`<p class="sm">Mỗi lần làm, câu hỏi được trộn ngẫu nhiên thành đề mới. Hết giờ sẽ tự nộp bài.</p>`+E.map((e,i)=>`<div class="cd"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div><div style="font-weight:500">${e[0]}</div><div class="sm">${e[1]} · ${e[3]} câu · ${e[4]} phút</div></div><button onclick="run(pick(E[${i}][2],E[${i}][3]),E[${i}][0],'e${i}',E[${i}][4]*60)">Làm bài</button></div>${S["e"+i]!=null?`<div class="sm">Điểm gần nhất: ${S["e"+i]}</div>`:""}</div>`).join("")}
+function form(){m.innerHTML=F.map(f=>`<div class="cd"><div style="font-weight:500;margin-bottom:4px">${f[0]}</div>${f[1].map(x=>`<div class="fm">${x}</div>`).join("")}</div>`).join("")}
+go(0);
+</script>
+</body>
+</html>
